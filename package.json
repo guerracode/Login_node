@@ -1,0 +1,33 @@
+{
+  "name": "backendos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Siulch/backendos.git"
+  },
+  "keywords": [],
+  "author": "Jose Luis Chavez <josephsiul15@gmai.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Siulch/backendos/issues"
+  },
+  "homepage": "https://github.com/Siulch/backendos#readme",
+  "dependencies": {
+    "@hapi/boom": "^9.1.0",
+    "@hapi/joi": "^17.1.1",
+    "bcrypt": "^5.0.0",
+    "chalk": "^4.1.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "socket.io": "^2.3.0"
+  }
+}
