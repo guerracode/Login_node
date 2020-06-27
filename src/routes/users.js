@@ -1,18 +1,25 @@
 const express = require('express');
 const chalk = require('chalk');
 const response = require('../utils/response');
+const Controller = require('../services/users.js');
 
 function usersApi(app) {
-   const router = express.Router();
+  const router = express.Router();
 
-   app.use('/api/users', router);
+  app.use('/api/users', router);
 
-   router.get('/', (req, res) => {
-      console.log(chalk.blue('Esto es Azul'));
-      console.log(chalk.red('Esto es Azul'));
-      console.log(chalk.green('Esto es Azul'));
-      response.success(req, res, "Todo Bien");
-   });
-}; 
+  router.get('/', (req, res) => {
+    Controller.getUsers()
+      .then(users => {
+        response.success(req, res, users, 'OK', 200);
+      })
+      .catch(err => {
+        response.error(req, res, err, 'ERROR', 500);
+      });
+  });
+  // router.get('/:id', getUser);
+  // router.post('/', createUser);
+
+}
 
 module.exports = usersApi;
