@@ -1,10 +1,10 @@
 const bcrypt = require('bcrypt');
-const auth = require('../lib/auth');
-const store = require('../lib/pg.js');
+const authToken = require('../lib/authToken');
+const store = require('../lib/db.js');
 
 const TABLE = 'auth';
 
-async function createAuth(data) {
+async function upsertAuth(data, creteUpdate) {
   const authData = {
     id: data.id,
   };
@@ -17,7 +17,7 @@ async function createAuth(data) {
     authData.password = await bcrypt.hash(data.password, 5);
   }
 
-  return store.createAuth(TABLE, authData);
+  return store.upsertAuth(TABLE, authData, creteUpdate);
 }
 
 async function login(username, password) {
@@ -26,16 +26,15 @@ async function login(username, password) {
 
   return bcrypt.compare(password, data.password).then(areEqual => {
     if (areEqual === true) {
-      // Generar token;
-      console.log("Are Equal!!");
-      return auth.sign({ ...data });
+      console.log('Are Equal!!');
+      return authToken.sign({ ...data });
     } else {
-      throw new Error('Informacion invalida');
+      throw new Error('Invalid Information');
     }
   });
 }
 
 module.exports = {
-  createAuth,
+  upsertAuth,
   login,
 };

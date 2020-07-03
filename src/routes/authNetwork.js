@@ -1,7 +1,7 @@
 const express = require('express');
 const chalk = require('chalk');
 const response = require('../utils/response');
-const Controller = require('../services/auth');
+const Controller = require('../services/authController');
 
 function authApi(app) {
   const router = express.Router();
@@ -12,10 +12,10 @@ function authApi(app) {
     Controller.login(req.body.username, req.body.password)
       .then(token => {
         console.log(token);
-        response.success(req, res, token, 'Welocome to Backendos!!',);
+        response.success(req, res, token, 'Welocome!!!');
       })
       .catch(err => {
-        response.error(req, res, err, 'Error at Login');
+        response.error(req, res, err, 'Login Error');
       });
   });
 }
