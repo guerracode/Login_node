@@ -1,0 +1,698 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Login API Documentation</title><style>
+	/* webkit printing magic: print all background colors */
+	html {
+		-webkit-print-color-adjust: exact;
+	}
+	* {
+		box-sizing: border-box;
+		-webkit-print-color-adjust: exact;
+	}
+	
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+	}
+	@media only screen {
+		body {
+			margin: 2em auto;
+			max-width: 900px;
+			color: rgb(55, 53, 47);
+		}
+	}
+	
+	body {
+		line-height: 1.5;
+		white-space: pre-wrap;
+	}
+	
+	a,
+	a.visited {
+		color: inherit;
+		text-decoration: underline;
+	}
+	
+	.pdf-relative-link-path {
+		font-size: 80%;
+		color: #444;
+	}
+	
+	h1,
+	h2,
+	h3 {
+		letter-spacing: -0.01em;
+		line-height: 1.2;
+		font-weight: 600;
+		margin-bottom: 0;
+	}
+	
+	.page-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-top: 0;
+		margin-bottom: 0.75em;
+	}
+	
+	h1 {
+		font-size: 1.875rem;
+		margin-top: 1.875rem;
+	}
+	
+	h2 {
+		font-size: 1.5rem;
+		margin-top: 1.5rem;
+	}
+	
+	h3 {
+		font-size: 1.25rem;
+		margin-top: 1.25rem;
+	}
+	
+	.source {
+		border: 1px solid #ddd;
+		border-radius: 3px;
+		padding: 1.5em;
+		word-break: break-all;
+	}
+	
+	.callout {
+		border-radius: 3px;
+		padding: 1rem;
+	}
+	
+	figure {
+		margin: 1.25em 0;
+		page-break-inside: avoid;
+	}
+	
+	figcaption {
+		opacity: 0.5;
+		font-size: 85%;
+		margin-top: 0.5em;
+	}
+	
+	mark {
+		background-color: transparent;
+	}
+	
+	.indented {
+		padding-left: 1.5em;
+	}
+	
+	hr {
+		background: transparent;
+		display: block;
+		width: 100%;
+		height: 1px;
+		visibility: visible;
+		border: none;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+	}
+	
+	img {
+		max-width: 100%;
+	}
+	
+	@media only print {
+		img {
+			max-height: 100vh;
+			object-fit: contain;
+		}
+	}
+	
+	@page {
+		margin: 1in;
+	}
+	
+	.collection-content {
+		font-size: 0.875rem;
+	}
+	
+	.column-list {
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	.column {
+		padding: 0 1em;
+	}
+	
+	.column:first-child {
+		padding-left: 0;
+	}
+	
+	.column:last-child {
+		padding-right: 0;
+	}
+	
+	.table_of_contents-item {
+		display: block;
+		font-size: 0.875rem;
+		line-height: 1.3;
+		padding: 0.125rem;
+	}
+	
+	.table_of_contents-indent-1 {
+		margin-left: 1.5rem;
+	}
+	
+	.table_of_contents-indent-2 {
+		margin-left: 3rem;
+	}
+	
+	.table_of_contents-indent-3 {
+		margin-left: 4.5rem;
+	}
+	
+	.table_of_contents-link {
+		text-decoration: none;
+		opacity: 0.7;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+	}
+	
+	table,
+	th,
+	td {
+		border: 1px solid rgba(55, 53, 47, 0.09);
+		border-collapse: collapse;
+	}
+	
+	table {
+		border-left: none;
+		border-right: none;
+	}
+	
+	th,
+	td {
+		font-weight: normal;
+		padding: 0.25em 0.5em;
+		line-height: 1.5;
+		min-height: 1.5em;
+		text-align: left;
+	}
+	
+	th {
+		color: rgba(55, 53, 47, 0.6);
+	}
+	
+	ol,
+	ul {
+		margin: 0;
+		margin-block-start: 0.6em;
+		margin-block-end: 0.6em;
+	}
+	
+	li > ol:first-child,
+	li > ul:first-child {
+		margin-block-start: 0.6em;
+	}
+	
+	ul > li {
+		list-style: disc;
+	}
+	
+	ul.to-do-list {
+		text-indent: -1.7em;
+	}
+	
+	ul.to-do-list > li {
+		list-style: none;
+	}
+	
+	.to-do-children-checked {
+		text-decoration: line-through;
+		opacity: 0.375;
+	}
+	
+	ul.toggle > li {
+		list-style: none;
+	}
+	
+	ul {
+		padding-inline-start: 1.7em;
+	}
+	
+	ul > li {
+		padding-left: 0.1em;
+	}
+	
+	ol {
+		padding-inline-start: 1.6em;
+	}
+	
+	ol > li {
+		padding-left: 0.2em;
+	}
+	
+	.mono ol {
+		padding-inline-start: 2em;
+	}
+	
+	.mono ol > li {
+		text-indent: -0.4em;
+	}
+	
+	.toggle {
+		padding-inline-start: 0em;
+		list-style-type: none;
+	}
+	
+	/* Indent toggle children */
+	.toggle > li > details {
+		padding-left: 1.7em;
+	}
+	
+	.toggle > li > details > summary {
+		margin-left: -1.1em;
+	}
+	
+	.selected-value {
+		display: inline-block;
+		padding: 0 0.5em;
+		background: rgba(206, 205, 202, 0.5);
+		border-radius: 3px;
+		margin-right: 0.5em;
+		margin-top: 0.3em;
+		margin-bottom: 0.3em;
+		white-space: nowrap;
+	}
+	
+	.collection-title {
+		display: inline-block;
+		margin-right: 1em;
+	}
+	
+	time {
+		opacity: 0.5;
+	}
+	
+	.icon {
+		display: inline-block;
+		max-width: 1.2em;
+		max-height: 1.2em;
+		text-decoration: none;
+		vertical-align: text-bottom;
+		margin-right: 0.5em;
+	}
+	
+	img.icon {
+		border-radius: 3px;
+	}
+	
+	.user-icon {
+		width: 1.5em;
+		height: 1.5em;
+		border-radius: 100%;
+		margin-right: 0.5rem;
+	}
+	
+	.user-icon-inner {
+		font-size: 0.8em;
+	}
+	
+	.text-icon {
+		border: 1px solid #000;
+		text-align: center;
+	}
+	
+	.page-cover-image {
+		display: block;
+		object-fit: cover;
+		width: 100%;
+		height: 30vh;
+	}
+	
+	.page-header-icon {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+	}
+	
+	.page-header-icon-with-cover {
+		margin-top: -0.72em;
+		margin-left: 0.07em;
+	}
+	
+	.page-header-icon img {
+		border-radius: 3px;
+	}
+	
+	.link-to-page {
+		margin: 1em 0;
+		padding: 0;
+		border: none;
+		font-weight: 500;
+	}
+	
+	p > .user {
+		opacity: 0.5;
+	}
+	
+	td > .user,
+	td > time {
+		white-space: nowrap;
+	}
+	
+	input[type="checkbox"] {
+		transform: scale(1.5);
+		margin-right: 0.6em;
+		vertical-align: middle;
+	}
+	
+	p {
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+	
+	.image {
+		border: none;
+		margin: 1.5em 0;
+		padding: 0;
+		border-radius: 0;
+		text-align: center;
+	}
+	
+	.code,
+	code {
+		background: rgba(135, 131, 120, 0.15);
+		border-radius: 3px;
+		padding: 0.2em 0.4em;
+		border-radius: 3px;
+		font-size: 85%;
+		tab-size: 2;
+	}
+	
+	code {
+		color: #eb5757;
+	}
+	
+	.code {
+		padding: 1.5em 1em;
+	}
+	
+	.code > code {
+		background: none;
+		padding: 0;
+		font-size: 100%;
+		color: inherit;
+	}
+	
+	blockquote {
+		font-size: 1.25em;
+		margin: 1em 0;
+		padding-left: 1em;
+		border-left: 3px solid rgb(55, 53, 47);
+	}
+	
+	.bookmark {
+		text-decoration: none;
+		max-height: 8em;
+		padding: 0;
+		display: flex;
+		width: 100%;
+		align-items: stretch;
+	}
+	
+	.bookmark-title {
+		font-size: 0.85em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		height: 1.75em;
+		white-space: nowrap;
+	}
+	
+	.bookmark-text {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.bookmark-info {
+		flex: 4 1 180px;
+		padding: 12px 14px 14px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	
+	.bookmark-image {
+		width: 33%;
+		flex: 1 1 180px;
+		display: block;
+		position: relative;
+		object-fit: cover;
+		border-radius: 1px;
+	}
+	
+	.bookmark-description {
+		color: rgba(55, 53, 47, 0.6);
+		font-size: 0.75em;
+		overflow: hidden;
+		max-height: 4.5em;
+		word-break: break-word;
+	}
+	
+	.bookmark-href {
+		font-size: 0.75em;
+		margin-top: 0.25em;
+	}
+	
+	.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+	.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+	.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+	.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+	.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+	
+	.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+	
+	.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+	
+	.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+	
+	.highlight-default {
+	}
+	.highlight-gray {
+		color: rgb(155,154,151);
+	}
+	.highlight-brown {
+		color: rgb(100,71,58);
+	}
+	.highlight-orange {
+		color: rgb(217,115,13);
+	}
+	.highlight-yellow {
+		color: rgb(223,171,1);
+	}
+	.highlight-teal {
+		color: rgb(15,123,108);
+	}
+	.highlight-blue {
+		color: rgb(11,110,153);
+	}
+	.highlight-purple {
+		color: rgb(105,64,165);
+	}
+	.highlight-pink {
+		color: rgb(173,26,114);
+	}
+	.highlight-red {
+		color: rgb(224,62,62);
+	}
+	.highlight-gray_background {
+		background: rgb(235,236,237);
+	}
+	.highlight-brown_background {
+		background: rgb(233,229,227);
+	}
+	.highlight-orange_background {
+		background: rgb(250,235,221);
+	}
+	.highlight-yellow_background {
+		background: rgb(251,243,219);
+	}
+	.highlight-teal_background {
+		background: rgb(221,237,234);
+	}
+	.highlight-blue_background {
+		background: rgb(221,235,241);
+	}
+	.highlight-purple_background {
+		background: rgb(234,228,242);
+	}
+	.highlight-pink_background {
+		background: rgb(244,223,235);
+	}
+	.highlight-red_background {
+		background: rgb(251,228,228);
+	}
+	.block-color-default {
+		color: inherit;
+		fill: inherit;
+	}
+	.block-color-gray {
+		color: rgba(55, 53, 47, 0.6);
+		fill: rgba(55, 53, 47, 0.6);
+	}
+	.block-color-brown {
+		color: rgb(100,71,58);
+		fill: rgb(100,71,58);
+	}
+	.block-color-orange {
+		color: rgb(217,115,13);
+		fill: rgb(217,115,13);
+	}
+	.block-color-yellow {
+		color: rgb(223,171,1);
+		fill: rgb(223,171,1);
+	}
+	.block-color-teal {
+		color: rgb(15,123,108);
+		fill: rgb(15,123,108);
+	}
+	.block-color-blue {
+		color: rgb(11,110,153);
+		fill: rgb(11,110,153);
+	}
+	.block-color-purple {
+		color: rgb(105,64,165);
+		fill: rgb(105,64,165);
+	}
+	.block-color-pink {
+		color: rgb(173,26,114);
+		fill: rgb(173,26,114);
+	}
+	.block-color-red {
+		color: rgb(224,62,62);
+		fill: rgb(224,62,62);
+	}
+	.block-color-gray_background {
+		background: rgb(235,236,237);
+	}
+	.block-color-brown_background {
+		background: rgb(233,229,227);
+	}
+	.block-color-orange_background {
+		background: rgb(250,235,221);
+	}
+	.block-color-yellow_background {
+		background: rgb(251,243,219);
+	}
+	.block-color-teal_background {
+		background: rgb(221,237,234);
+	}
+	.block-color-blue_background {
+		background: rgb(221,235,241);
+	}
+	.block-color-purple_background {
+		background: rgb(234,228,242);
+	}
+	.block-color-pink_background {
+		background: rgb(244,223,235);
+	}
+	.block-color-red_background {
+		background: rgb(251,228,228);
+	}
+	.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+	.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+	.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+	.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+	.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+	.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+	.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+	.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+	.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+	.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+	
+	.checkbox {
+		display: inline-flex;
+		vertical-align: text-bottom;
+		width: 16;
+		height: 16;
+		background-size: 16px;
+		margin-left: 2px;
+		margin-right: 5px;
+	}
+	
+	.checkbox-on {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+	
+	.checkbox-off {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+		
+	</style></head><body><article id="765a74a8-b3b3-430e-a62a-a1d0621f7e0b" class="page sans"><header><img class="page-cover-image" src="https://miro.medium.com/max/4320/1*eHaphpk0W5_kK7ZMwv0AAQ.jpeg" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📃</span></div><h1 class="page-title">Login API Documentation</h1></header><div class="page-body"><h3 id="a8bb4ae9-b931-4a59-80e0-7c41e06e17bc" class="">Create User</h3><p id="8506d8f9-43c9-43b8-923c-08a6f757a4b4" class=""><mark class="highlight-orange">POST</mark>   <a href="https://loginsiulch.herokuapp.com/api/users">https://loginsiulch.herokuapp.com/api/users</a></p><p id="5ea497d8-70c4-4d70-8832-bdf49fbe409e" class=""><mark class="highlight-gray">Create a new user.</mark></p><p id="988506de-e5f5-4e5e-8128-17e292d08485" class="">Body: </p><pre id="84c8b4b6-ad1b-4b0a-a9b4-f118f26c6da2" class="code"><code>{
+		&quot;username&quot;: &quot;paquito&quot;,
+		&quot;name&quot;: &quot;paco&quot;, 
+		&quot;email&quot;: &quot;paco@gmail.com&quot;,
+		&quot;password&quot;: &quot;123456&quot;
+	}</code></pre><p id="70c40dd5-d195-4055-9391-899a9bfd6f64" class="">Response:</p><pre id="9626eabd-cf62-4679-9990-0eb5c88df317" class="code"><code>{
+			&quot;success&quot;: true,
+			&quot;data&quot;: {
+					&quot;username&quot;: &quot;paquito&quot;,
+					&quot;name&quot;: &quot;paco&quot;,
+					&quot;email&quot;: &quot;paco@gmail.com&quot;,
+					&quot;id&quot;: &quot;eJqe7YVelBjUfy211E66T&quot;
+			},
+			&quot;message&quot;: &quot;User created Correctly!&quot;
+	}</code></pre><hr id="31258553-1a97-4e61-b914-d202bdc3b3b4"/><h3 id="c2751ab2-469a-49ce-bed2-310f4b686042" class="">Get Users</h3><p id="61519334-ea3b-438c-bf99-fd188af373fd" class=""><mark class="highlight-teal">GET </mark>  <a href="https://loginsiulch.herokuapp.com/api/users">https://loginsiulch.herokuapp.com/api/users</a></p><p id="b14d0299-f7d2-41d4-b234-5c03227e126c" class=""><mark class="highlight-gray">Get a list of all registered users.</mark></p><p id="8af2fb1c-64dc-485e-a451-d37075082fc7" class="">Response:  </p><pre id="2b55b54b-09fe-488c-a643-d55e0a317689" class="code"><code>{
+			&quot;success&quot;: true,
+			&quot;data&quot;: [
+					{
+							&quot;id&quot;: &quot;b6QhG0e0dtSzcCbydCJDX&quot;,
+							&quot;username&quot;: &quot;Siulchg&quot;,
+							&quot;name&quot;: &quot;Jose Luis Chavez&quot;,
+							&quot;email&quot;: &quot;siulch@gmail.com&quot;
+					},
+					{
+							&quot;id&quot;: &quot;QNJBfYebmJ6pYIOoUN5Ex&quot;,
+							&quot;username&quot;: &quot;Si&quot;,
+							&quot;name&quot;: &quot;Jose Luis Chavez g&quot;,
+							&quot;email&quot;: &quot;si@gmail.com&quot;
+					},
+					{
+							&quot;id&quot;: &quot;eJqe7YVelBjUfy211E66T&quot;,
+							&quot;username&quot;: &quot;paquito&quot;,
+							&quot;name&quot;: &quot;paco&quot;,
+							&quot;email&quot;: &quot;paco@gmail.com&quot;
+					}
+			],
+			&quot;message&quot;: &quot;OK&quot;
+	}</code></pre><hr id="fb5f3c39-39e7-407d-96e1-382b7c3a9f1e"/><h3 id="8eebdf10-0d9e-4a25-82f7-fdecff0be493" class="">Get User</h3><p id="82c02072-3d12-47d5-8dbf-f018cb28416e" class=""><mark class="highlight-teal">GET</mark><mark class="highlight-purple"> </mark>   <a href="https://loginsiulch.herokuapp.com/api/users/">https://loginsiulch.herokuapp.com/api/users/</a>{id}</p><p id="7853bc88-c102-4b65-b87b-dbd3fbd1f71b" class=""><mark class="highlight-gray">Get a single user, filtering with the user id.</mark></p><p id="c4a085e6-57bd-45bf-81e3-2e1be36f54e2" class="">Response:  </p><pre id="ec24de87-1de7-4290-84a5-ae2a95990642" class="code"><code>{
+			&quot;success&quot;: true,
+			&quot;data&quot;: [
+					{
+							&quot;id&quot;: &quot;eJqe7YVelBjUfy211E66T&quot;,
+							&quot;username&quot;: &quot;paquito&quot;,
+							&quot;name&quot;: &quot;paco&quot;,
+							&quot;email&quot;: &quot;paco@gmail.com&quot;
+					}
+			],
+			&quot;message&quot;: &quot;OK&quot;
+	}</code></pre><hr id="854393bc-50f4-4d80-b879-d7b42a9762a0"/><h3 id="f742f852-5b47-4ef3-b49d-028c3a74f07a" class="">Login</h3><p id="5f99b235-4b97-449f-bd80-c6f453f3eea3" class=""><mark class="highlight-orange">POST</mark><mark class="highlight-blue">   </mark><a href="https://loginsiulch.herokuapp.com/api/login">https://loginsiulch.herokuapp.com/api/login</a></p><p id="8fc9c6d3-ab0b-48ba-a74d-67cc1d23292e" class=""><mark class="highlight-gray">Login using the username and password that used when creating the user.</mark></p><p id="eda15518-4a8f-40bd-a1e1-84df6540f9f2" class="">Body:</p><pre id="d2cb74d6-6876-4412-ba41-d09e30115c3e" class="code"><code>{
+		&quot;username&quot;: &quot;paquito&quot;,
+		&quot;password&quot;: &quot;123456&quot;
+	}</code></pre><p id="c6050c6b-40b9-4b0d-835b-c03a37967d2e" class="">Response:</p><pre id="ba7e7d6c-7578-4e36-ba3c-6bb3c244527e" class="code"><code>{
+		&quot;success&quot;: true,
+		&quot;data&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhcXVpdG8iLCJwY
+	XNzd29yZCI6IiQyYiQwNSRCZHcva0NXSGNWQlhJNW4xTnFUTDIuZ0RuZlBORXpQVGkxelFoc3dPd1Y0NT
+	ZMSXBoaTlPTyIsImlkIjoiemZkU0ZVdWJDTnJfUXBiQ0RYMkJ5IiwiaWF0IjoxNTkzMzA3NjcxfQ.luKP
+	OabXluTYrI7seuX4wLmPlj0ujG0xI0m7L28slEU&quot;,
+		&quot;message&quot;: &quot;Welocome!!&quot;
+	}</code></pre><hr id="d77d9fbf-cbfc-4704-bfa8-0e0c964a998c"/><h3 id="e385ee64-aa8c-484f-949c-e367ec90fb11" class="">Update user</h3><p id="cf6f58ad-9983-468a-a96d-8322f9a64b05" class=""><mark class="highlight-blue">PUT</mark>    <a href="https://loginsiulch.herokuapp.com/api/users">https://loginsiulch.herokuapp.com/api/users</a></p><p id="bf7cd6bc-4dfe-414b-8c39-6adf74ddbaf1" class=""><mark class="highlight-gray">Update user passing the data that want to update and the user id thats going to be updated.</mark></p><p id="22f60d5b-d462-4317-a697-790a29ce5724" class="">Authorization:</p><ul id="546ddf21-5995-4b19-9caf-58b11e5e85aa" class="bulleted-list"><li>Bearer Token:</li></ul><pre id="b2e1e358-3c70-4143-9ba3-2330b80ab3d5" class="code"><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhcXVpdG8iLCJwYXNzd29yZCI6
+	IiQyYiQwNSRCZHcva0NXSGNWQlhJNW4xTnFUTDIuZ0RuZlBORXpQVGkxelFoc3dPd1Y0NTZMSXBoaTlPT
+	yIsImlkIjoiemZkU0ZVdWJDTnJfUXBiQ0RYMkJ5IiwiaWF0IjoxNTkzMzA3NjcxfQ.luKPOabXluTYrI7
+	seuX4wLmPlj0ujG0xI0m7L28slEU</code></pre><p id="48067249-ae94-4a41-a57f-1c967ac0af25" class="">Body:</p><pre id="9d2cebdb-3708-4a90-baaf-9a55ef9b57ff" class="code"><code>{
+		&quot;id&quot;: &quot;QNJBfYebmJ6pYIOoUN5Ex&quot;,
+		&quot;username&quot;: &quot;Siul&quot;,
+		&quot;name&quot;: &quot;Jose Luis&quot;, 
+		&quot;email&quot;: &quot;siul@gmail.com&quot;,
+		&quot;password&quot;: &quot;456&quot;
+	}</code></pre><p id="33c31e0d-cc1e-435b-a229-29c16f03fb40" class="">Response:</p><pre id="7036b501-3e80-4562-99c5-c903a80fdcb4" class="code"><code>{
+			&quot;success&quot;: true,
+			&quot;data&quot;: {
+					&quot;username&quot;: &quot;Siul&quot;,
+					&quot;name&quot;: &quot;Jose Luis&quot;,
+					&quot;email&quot;: &quot;siul@gmail.com&quot;,
+					&quot;id&quot;: &quot;QNJBfYebmJ6pYIOoUN5Ex&quot;
+			},
+			&quot;message&quot;: &quot;User updated Correctly!&quot;
+	}</code></pre></div></article></body></html>

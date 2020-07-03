@@ -2,13 +2,11 @@ const express = require('express');
 const { port } = require('./src/config/config');
 const usersApi = require('./src/routes/usersNetwork');
 const authApi = require('./src/routes/authNetwork');
-const swaggerUi = require('swagger-ui-express');
-const swaggerDoc = require('./src/utils/swagger.json');
 
 const app = express();
 
 app.use(express.json());
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+app.use('/api-docs', express.static('public'));
 
 usersApi(app);
 authApi(app);
