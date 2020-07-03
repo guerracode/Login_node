@@ -1,12 +1,20 @@
 const { Pool } = require('pg');
 const chalk = require('chalk');
+const config = require('../config/config');
 
 const pool = new Pool({
-  user: 'platzi',
-  host: 'localhost',
-  database: 'backendos',
-  password: 'platzi',
+  user: config.store.user,
+  host: config.store.host,
+  database: config.store.database,
+  password: config.store.password,
+  port: config.store.port,
 });
+// const pool = new Pool({
+//   user: 'platzi',
+//   host: 'localhost',
+//   database: 'backendos',
+//   password: 'platzi',
+// });
 
 pool.on('error', (err, client) => {
   console.error('Unexpected error on idle client', err);
